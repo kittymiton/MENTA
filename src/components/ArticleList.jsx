@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+// import { Fragment } from 'react';
 import { posts } from '../data/posts';
 
 
@@ -24,8 +24,8 @@ export const ArticleList = () => {
       </header>
       <main>
         {posts.map((post) => (
-          <section>
-            <div key={post.id} className="post">
+          <section key={post.id}>
+            <div className="post">
               <div className="post-info">
                 <p>{formatDate(post.createdAt)}</p>
                 <ul>{post.categories.map((category, index) => (
@@ -34,14 +34,15 @@ export const ArticleList = () => {
                 </ul>
               </div>
               <h1>{post.title}</h1>
-              {/* 改行コード毎に<br />を追加 gフラグで文字列内のすべてから検索*/}
-              <p>{post.content.split(/<br\/>/g).map((line, index) => (
+              <p dangerouslySetInnerHTML={{ __html: post.content }} />
+              {/* 改行コード毎に<br />を追加 gフラグで文字列内のすべてから検索 */}
+              {/* <p>{post.content.split(/<br\/>/g).map((line, index) => (
                 <Fragment key={index}>
                   {line}
                   <br />
                 </Fragment>
               ))}
-              </p>
+              </p> */}
             </div>
           </section>
         ))};
