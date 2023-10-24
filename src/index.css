@@ -22,7 +22,7 @@ nav > ul {
 a {
   display: block;
   text-decoration: none;
-  color: #fff;
+  color: red;
 }
 a:visited {
   color: inherit;
@@ -53,7 +53,8 @@ main {
   border: 1px solid #004fb9;
   border-radius: 4px;
 }
-.post > h1 {
+.post > h1,
+.post-detail > h1 {
   margin: .8rem 0 0;
   font-size: 2.4rem;
   font-weight: 600;
@@ -65,4 +66,17 @@ main {
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
+}
+.post-detail {
+  margin: 4rem;
+  border: none;
+  color: #333;
+}
+.post-detail img {
+  max-width: 100%;
+  margin: 0 0 1.6rem;
+}
+.post-detail > p {
+  margin: 1.6rem 0 0;
+  font-size: 1.6rem;
 }
