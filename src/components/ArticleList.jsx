@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { posts } from '../data/posts';
-
+//import { posts } from '../data/posts';
+import { useEffect, useState } from "react";
 export const ArticleList = () => {
 
   // 日付を変換
@@ -11,11 +11,39 @@ export const ArticleList = () => {
   // <br/>タグを\n（改行）に置き換え
   //const replaceBrTags = (content) => content.replace(/<br\/>/g, '\n');
 
+  const [posts, setPost] = useState([]);
+
+  // APIからデータ取得
+  useEffect(() => {
+    fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts`)
+      .then(response => response.json())
+      // .then(data => {
+      //   setPost(data);
+      //   console.log(data);
+      //   //console.log(Array.isArray(posts));
+      //   const title = data.map(post => post.title);
+      //   console.log(title);
+      // })
+      .then(data => {
+        setPost(Object.keys(data))
+        console.log(data);
+      })
+    // .catch(error => {
+    //   console.error('There has been a problem with your fetch operation:', error);
+    // });
+  }, [])
+  // console.log(posts);
+  //console.log(Array.isArray(posts));
+  // console.log(posts[0]);
+
+  // const title = posts.map(post => post.title);
+  // console.log(title);
+
   return (
     <>
       <main>
-        {posts.map((post) => (
-          <section key={post.id}>
+        {posts.map((post, index) => (
+          <section key={index}>
             <Link to={`/posts/${post.id}`}>
               <div className="post">
                 <div className="post-info">
@@ -36,7 +64,6 @@ export const ArticleList = () => {
                 </Fragment>
               ))}
             </p>*/}
-
               </div>
             </Link>
           </section>
