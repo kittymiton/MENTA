@@ -24,24 +24,22 @@ export const ArticleDetail = () => {
   if (!post) return <div>データ読み込み中</div>
 
   return (
-    <>
-      <main>
-        <section>
-          <div className="post-detail">
-            <img src={post.thumbnailUrl} alt={post.title} />
-            <div className="post-info">
-              <p>{formatDate(post.createdAt)}</p>
-              <ul>{post.categories.map((category, index) => (
-                <li key={index}>{category}
-                </li>
-              ))}
-              </ul>
-            </div>
-            <h1>{post.title}</h1>
-            <p dangerouslySetInnerHTML={{ __html: post.content }} />
+    <main>
+      <section>
+        <div className="post-detail">
+          <img src={post.thumbnailUrl} alt={post.title} />
+          <div className="post-info">
+            <p>{formatDate(post.createdAt)}</p>
+            <ul>{post.categories.map((category, index) => (
+              <li key={index}>{category}
+              </li>
+            ))}
+            </ul>
           </div>
-        </section>
-      </main>
-    </>
+          <h1>{post.title}</h1>
+          <p dangerouslySetInnerHTML={{ __html: post.content }} />
+        </div>
+      </section>
+    </main>
   );
 };

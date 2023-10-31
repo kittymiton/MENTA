@@ -20,35 +20,33 @@ export const ArticleList = () => {
   }, [])
 
   return (
-    <>
-      <main>
-        {posts.map((post) => (
-          <section key={post.id}>
-            <Link to={`/posts/${post.id}`}>
-              <div className="post">
-                <div className="post-info">
-                  <p>{formatDate(post.createdAt)}</p>
-                  <ul>{post.categories.map((category, index) => (
-                    <li key={index}>{category}
-                    </li>
-                  ))}
-                  </ul>
-                </div>
-                <h1>{post.title}</h1>
-                <p dangerouslySetInnerHTML={{ __html: post.content }} />
-                {/* 改行コード毎に<br />を追加 gフラグで文字列内のすべてから検索 */}
-                {/* <p>{post.content.split(/<br\/>/g).map((line, index) => (
+    <main>
+      {posts.map((post) => (
+        <section key={post.id}>
+          <Link to={`/posts/${post.id}`}>
+            <div className="post">
+              <div className="post-info">
+                <p>{formatDate(post.createdAt)}</p>
+                <ul>{post.categories.map((category, index) => (
+                  <li key={index}>{category}
+                  </li>
+                ))}
+                </ul>
+              </div>
+              <h1>{post.title}</h1>
+              <p dangerouslySetInnerHTML={{ __html: post.content }} />
+              {/* 改行コード毎に<br />を追加 gフラグで文字列内のすべてから検索 */}
+              {/* <p>{post.content.split(/<br\/>/g).map((line, index) => (
                 <Fragment key={index}>
                   {line}
                   <br />
                 </Fragment>
               ))}
             </p>*/}
-              </div>
-            </Link>
-          </section>
-        ))}
-      </main >
-    </>
+            </div>
+          </Link>
+        </section>
+      ))}
+    </main >
   );
 };
