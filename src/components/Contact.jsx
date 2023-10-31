@@ -4,60 +4,61 @@ export const Contact = () => {
 
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const onChangeValue = (event) => {
-    setFormData({ ...formData, [event.target.id]: event.target.value });
-  };
-
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [messageError, setMessageError] = useState("");
 
+  const onChangeValue = (event) => {
+    setFormData({ ...formData, [event.target.id]: event.target.value });
+  };
+
   const validateForm = () => {
 
     const { name, email, message } = formData;
-    let isValid = true; // フィールド条件チェック初期値（条件を満たしていないければfalse）
-
     if (name === "") {
       setNameError("お名前は必須です");
-      isValid = false;
-    } else if (name.length > 30) {
-      setNameError("お名前は30文字以内で入力してください。");
-      isValid = false;
-    } else {
-      setNameError(""); // バリデーションチェック後に中身をカラにする
+      return false;
     }
+
+    if (name.length > 30) {
+      setNameError("お名前は30文字以内で入力してください。");
+      return false;
+    }
+
+    setNameError("");
 
     if (email === "") {
       setEmailError("メールアドレスは必須です");
-      isValid = false;
-    } else {
-      const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-      if (!emailRegex.test(email)) {
-        setEmailError("メールアドレスの形式が正しくありません。");
-        isValid = false;
-      } else {
-        setEmailError("");
-      }
+      return false;
     }
+
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("メールアドレスの形式が正しくありません。");
+      return false;
+    }
+
+    setEmailError("");
 
     if (message === "") {
       setMessageError("本文は必須です。");
-      isValid = false;
-    } else if (message.length > 500) {
-      setMessageError("本文は500文字以内で入力してください。");
-      isValid = false;
-    } else {
-      setMessageError("");
+      return false;
     }
 
-    return isValid; // isValidの値を関数に返す。（trueが返却された場合だけデータ送信処理実行）
+    if (message.length > 500) {
+      setMessageError("本文は500文字以内で入力してください。");
+      return false;
+    }
 
+    setMessageError("");
+
+    return true;
   }
 
   const onSubmitAction = async (event) => {
     event.preventDefault();
 
-    if (validateForm()) {
+    if (validateForm()) { // trueの場合
       try {
         const response = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts", {
           method: "POST",

@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 
 export const ArticleDetail = () => {
 
+  // idが変更されたときにデータをAPIから取得
+  const [post, setPost] = useState();
+
+  // 外部通信の結果
+  const [isError, setIsError] = useState(false); // エラーかどうかを持たせる変数
+  const [isLoading, setLoading] = useState(false); // 読み込み中かを持たせる変数
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('ja-JP');
@@ -11,17 +18,17 @@ export const ArticleDetail = () => {
   const { id } = useParams();
   // const post = posts.find((post) => post.id === Number(id));
 
-  // idが変更されたときにデータをAPIから取得
-  const [post, setPost] = useState();
-
   // APIからデータ取得
   useEffect(() => {
     fetch(`https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`)
       .then(response => response.json())
       .then(data => setPost(data.post))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false))
   }, [id])
 
-  if (!post) return <div>データ読み込み中</div>
+  if (isError) return <div>読み込みに失敗しました</div>
+  if (isLoading || !post) return <div>データ読み込み中</div> // 読み込みが終わるまでpostのデータ反映をしない
 
   return (
     <main>
