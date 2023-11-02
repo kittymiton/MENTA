@@ -22,7 +22,7 @@ nav > ul {
 a {
   display: block;
   text-decoration: none;
-  color: red;
+  color: #fff;
 }
 a:visited {
   color: inherit;
@@ -79,4 +79,53 @@ main {
 .post-detail > p {
   margin: 1.6rem 0 0;
   font-size: 1.6rem;
+}
+.contact-title {
+  margin: 4rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  margin: 4rem;
+}
+form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+  font-size: 1.6rem;
+}
+form label {
+  width: 30%;
+}
+form .write-area {
+  flex: 1;
+  color: red;
+}
+form input,
+form textarea {
+  width: 100%;
+  padding: 1.6rem;
+  border: 1px solid #aaa;
+  border-radius: .4rem;
+}
+form div:last-of-type {
+  justify-content: center;
+}
+form button {
+  margin: 2.4rem 0 0;
+  padding: .8rem;
+  width: 15%;
+  border: 1px solid #aaa;
+  border-radius: .4rem;
+}
+form button:first-of-type {
+  background: #333;
+  color: #fff;
+}
+form button:hover {
+  cursor: pointer;
 }
