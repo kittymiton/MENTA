@@ -13,8 +13,8 @@ export const Contact = () => {
   };
 
   const validateForm = () => {
-
     const { name, email, message } = formData;
+
     if (name === "") {
       setNameError("お名前は必須です");
       return false;
